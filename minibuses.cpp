@@ -70,10 +70,9 @@ void Minibus::disembarkPassengers()
 void Minibus::removePassengerByIndex(int index)
 {
 	if (index >= countOfPassengers) {
-		return; //сюда вообще по идее не зайдём
+		return;
 	}
 	else if (countOfPassengers == 1 || index == countOfPassengers - 1) {
-		//delete passengersInMinibus[index];
 		passengersInMinibus[index] = nullptr;
 	}
 	else {

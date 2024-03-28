@@ -36,7 +36,6 @@ Passenger* Stop::pickUpFirstPassenger()
 void Stop::transferPassengersByMoveLeft()
 {
 	passengers[0] = nullptr; //TODO TODO TODO TODO TODO
-	//delete passengers[0];
 	for (int i = 0; i < getPassengersCount() - 1; i++) {
 		passengers[i] = passengers[i + 1];
 	}

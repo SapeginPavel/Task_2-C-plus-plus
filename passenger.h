@@ -10,8 +10,6 @@ class Passenger {
 	Stop* targetStop;
 
 public:
-	//Passenger() {}
-
 	Passenger(string name, Stop* target) {
 		this->name = name;
 		this->targetStop = target;

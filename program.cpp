@@ -8,8 +8,7 @@
 #include "values.h"
 using namespace std;
 
-//todo сделать более удобным получение следующей остановки для автобуса (для тестов)
-//todo консольный вывод связан с исполнением программы. Надо больше во view перенести
+//Рекомендации для след таска: сделать view и тд публичными для класса. Больше делать через контроллер - MVVM.
 
 class Program {
 public:
@@ -20,9 +19,8 @@ public:
 
 		Stop** stops = createStops(view, stopsCount);
 
-
 		Route* route = new Route(stops, stopsCount);
-		int placesCount = COUNT_OF_PLACES_IN_MINIBUS;
+		int placesCount = view->inputCountOfPlaces(); //COUNT_OF_PLACES_IN_MINIBUS
 
 		Minibus* minibus = new Minibus(placesCount, route);
 
@@ -32,12 +30,37 @@ public:
 
 		view->showAllStopsWithPassengers(stops, stopsCount);
 
-		minibus->startMoving();
+		execute(view, minibus, stops, stopsCount);
 
-		for (int i = 0; i < stopsCount * 2 + 1; i++) {
+	}
+
+	void execute(View* view, Minibus* minibus, Stop** stops, int stopsCount) {
+		string userAction = "start";
+
+		view->showAvailableCommands();
+
+		while (!userAction._Equal("exit")) {
+			userAction = view->getNewUserAction();
+			cout << userAction << endl;
+			handleUserAction(userAction, view, minibus, stops, stopsCount);
+		}
+	}
+
+	void handleUserAction(string userAction, View* view, Minibus* minibus, Stop** stops, int stopsCount) {
+		if (userAction._Equal("m")) {
 			move(minibus, view);
 		}
+		else if (userAction._Equal("u")) {
+			createPassenger(view, stops, stopsCount);
+		}
+	}
 
+
+
+	void createPassenger(View* view, Stop** stops, int count) {
+		Passenger* p = view->createNewPassenger(stops, count);
+		Stop* startStop = view->getStartStopByName(stops, count);
+		startStop->addPassenger(p);
 	}
 
 	Stop** createStops(View* view, int stopsCount) {
@@ -48,6 +71,8 @@ public:
 		}
 		return stops;
 	}
+
+
 
 	void addRandomPassengers(Stop** stops, int stopsCount, int n) {
 		for (int i = 0; i < stopsCount; i++) {
@@ -71,28 +96,18 @@ public:
 	}
 
 	void move(Minibus* minibus, View* view) {
-		cout << endl << endl << endl << endl;
+		cout << endl << endl << endl;
 
-		cout << "Пассажиры в маршрутке: " << endl;
 		view->showMinibusPassengers(minibus);
-
 		minibus->goToNextBusStop();
-		cout << "Продвинулись" << endl;
+		view->showCurrentBusStop(minibus);
 
-		cout << "Текущая остановка: " << minibus->getCurrentStop()->getStopName() << endl;
-
-		cout << "Щас будем высаживать пассажиров" << endl;
+		view->showDisembark();
 		minibus->disembarkPassengers();
-		cout << "Высадили пассажиров" << endl;
-
-		cout << "Пассажиры в маршрутке: " << endl;
 		view->showMinibusPassengers(minibus);
 
-		cout << "Щас будем набирать пассажиров" << endl;
+		view->showPickUp();
 		minibus->pickUpPassengers();
-		cout << "Набрали пассажиров" << endl;
-
-		cout << "Пассажиры в маршрутке: " << endl;
 		view->showMinibusPassengers(minibus);
 	}
 };

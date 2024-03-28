@@ -18,11 +18,11 @@ public:
 		this->places = placesForBus;
 		this->route = route;
 		if (route->stopsCount != 0) {
-			currentStopNumber = 0;
+			currentStopNumber = -1;
 			isGoToTheLast = true;
 		}
 		passengersInMinibus = new Passenger*[places];
-		countOfPassengers = -1;
+		countOfPassengers = 0;
 	}
 
 public:

@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="controllers.cpp" />
     <ClCompile Include="minibuses.cpp" />
     <ClCompile Include="passenger.cpp" />
     <ClCompile Include="stop.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="Task_2_1_C++.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="controllers.h" />
     <ClInclude Include="passenger.h" />
     <ClInclude Include="stops.h" />
     <ClInclude Include="values.h" />
