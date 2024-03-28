@@ -6,12 +6,15 @@ using namespace std;
 
 class View {
 public:
+	void notificateAboutRandomPassengers();
+
 	string waitingForCommand();
 
 	void showAvailableCommands();
 
 	int inputBusStopCount();
 	int inputCountOfPlaces();
+	int inputCountOfRandomPassengers();
 	string inputBusStopName(int serialNumber);
 
 	void showAllStopsWithPassengers(Stop** stops, int count);

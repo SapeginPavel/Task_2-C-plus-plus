@@ -26,7 +26,9 @@ public:
 
 		int currentBusStop = minibus->getCurrentsStopNumber();
 		
-		addRandomPassengers(stops, stopsCount, 4);
+		//добавляем случайных пассажиров
+		int countOfRandomPassengers = view->inputCountOfRandomPassengers();
+		addRandomPassengers(stops, stopsCount, countOfRandomPassengers);
 
 		view->showAllStopsWithPassengers(stops, stopsCount);
 

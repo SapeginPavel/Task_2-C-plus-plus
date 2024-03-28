@@ -4,6 +4,11 @@
 
 using namespace std;
 
+void View::notificateAboutRandomPassengers()
+{
+	cout << "—оздали случайных пассажиров на каждой остановке" << endl;
+}
+
 string View::waitingForCommand()
 {
 	return "";
@@ -26,6 +31,12 @@ int View::inputBusStopCount()
 int View::inputCountOfPlaces()
 {
 	cout << "¬ведите количество мест в маршрутке: ";
+	return inputIntNumber();
+}
+
+int View::inputCountOfRandomPassengers()
+{
+	cout << "¬ведите количество случайных пассажиров на каждой остановке: ";
 	return inputIntNumber();
 }
 
